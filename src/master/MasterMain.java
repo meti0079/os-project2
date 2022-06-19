@@ -1,22 +1,28 @@
 package master;
 
+import os.Task;
 import os.Worker;
 import os.Server;
 import os.Storge;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MasterMain {
     public static int port;
+    public static int storegPort;
     public static int workerNumber;
-    public static int maxWeight;
-    public static int programNumber;
-    public static ArrayList<String> command;
-    public static ArrayList<String> programNames;
-    public static ArrayList<Integer> programWeights;
+    public static int RRTime;
+    public static int workNumber;
+    public static String alg;
+    public static String deadlock;
 
+    public static List<String> command;
+    public static ArrayList<String> data;
+    public static ArrayList<Task> tasks;
 
     public static void main(String[] args) {
         try {
@@ -26,20 +32,17 @@ public class MasterMain {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        command = new ArrayList<>();
-        programWeights = new ArrayList<>();
-        programNames = new ArrayList<>();
-        System.out.println("here");
+        command = new LinkedList<>();
+        tasks = new ArrayList<>();
+        data = new ArrayList<>();
+
         readInputs();
-        Server server = new Server(port, workerNumber, programNumber, maxWeight);
-        server.start();
+
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        makeCache();
-        try {
+            makeCache();
+            Thread.sleep(500);
+            Server server = new Server(port, workerNumber,data,tasks,storegPort,RRTime,alg,deadlock);
+            server.start();
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -53,8 +56,11 @@ public class MasterMain {
     public static void makeCache() {
         String className= Storge.class.getName();
         try {
+
+            command.add(className);
+            command.add(String.valueOf(storegPort));
             System.out.println(command);
-            ProcessBuilder builder = new ProcessBuilder(String.join(" ",command) , className);
+            ProcessBuilder builder = new ProcessBuilder(command);
             Process process = builder.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,8 +71,12 @@ public class MasterMain {
     public static void makeWorker() {
         String className= Worker.class.getName();
         try {
+            command.remove(command.size()-1);
+            command.remove(command.size()-1);
+            command.add(className);
+            command.add(String.valueOf(storegPort));
             System.out.println(command);
-            ProcessBuilder builder = new ProcessBuilder(String.join(" ",command) , className);
+            ProcessBuilder builder = new ProcessBuilder(command);
             Process process = builder.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,20 +88,28 @@ public class MasterMain {
 
     public static void readInputs() {
         Scanner scanner = new Scanner(System.in);
-        port = Integer.parseInt(scanner.nextLine());
-        workerNumber = Integer.parseInt(scanner.nextLine());
-        maxWeight = Integer.parseInt(scanner.nextLine());
-        int argNum = Integer.parseInt(scanner.nextLine());
+        int argNum=Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < argNum; i++) {
             command.add(scanner.nextLine());
         }
-        programNumber = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < programNumber; i++) {
-            String[] x = scanner.nextLine().split(" ");
-            programNames.add(x[0]);
-            programWeights.add(Integer.parseInt(x[1]));
+
+        port = Integer.parseInt(scanner.nextLine());
+        workerNumber = Integer.parseInt(scanner.nextLine());
+        alg= scanner.nextLine();
+        if (alg.equalsIgnoreCase("RR")) RRTime=Integer.parseInt(scanner.nextLine());
+        deadlock= scanner.nextLine();
+        storegPort=Integer.parseInt(scanner.nextLine());
+        String d= scanner.nextLine();
+        String ds[]=d.split(" ");
+        for (String s:ds) {
+            data.add(s);
         }
-//        System.out.println();
+        workNumber=Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < workNumber; i++) {
+            tasks.add(new Task(scanner.nextLine(), i));
+        }
+
+
 
     }
 }

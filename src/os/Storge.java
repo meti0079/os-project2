@@ -1,5 +1,7 @@
 package os;
 
+import logMe.Logger;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,20 +14,22 @@ public class Storge {
     HashMap<String, Integer> data;
 
 
-
+    private Logger logger;
     private boolean running;
     private ServerSocket storgeSocket;
-    private static final int PORT=100;
+    private static int PORT=100;
 
 
     public Storge() {
         data = new HashMap<>();
         running=true;
+        logger=new Logger("Storge");
+        logger.write("storge start on port "+PORT);
 
     }
 
     public static void main(String[] args) {
-
+        PORT=Integer.parseInt(args[0]);
         Storge storge = new Storge();
         try {
             storge.start();
@@ -58,15 +62,19 @@ public class Storge {
 
     private void establishStorge() throws IOException {
         storgeSocket = new ServerSocket(PORT);
+        logger.write("storge established ");
     }
 
     private void listen() throws IOException {
           Socket socket =storgeSocket.accept();
-
+          logger.write("some one connect");
           handleWorker(socket);
+
+
     }
 
     private void handleWorker(Socket socket) throws IOException {
+        logger.write("now in handle works ");
       DataInputStream  dis = new DataInputStream(socket.getInputStream());
       DataOutputStream  dos = new DataOutputStream(socket.getOutputStream());
         Thread thread = new Thread(new Runnable() {
@@ -76,6 +84,7 @@ public class Storge {
                     String request = null;
                     try {
                         request = dis.readUTF();
+                        logger.write("storge recive "+request);
                        if (!handleRequest(request,dos)){
                            socket.close();
                            break;
@@ -107,9 +116,6 @@ public class Storge {
 
             //TODO
         }
-
-
-
 
         return true;
     }

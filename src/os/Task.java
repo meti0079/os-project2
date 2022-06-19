@@ -1,23 +1,26 @@
 package os;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 public class Task {
-    private ArrayList<String> indexes;
-    private ArrayList<String> times;
+    private LinkedList<String> indexes;
+    private LinkedList<String> times;
+    private  String task;
     private int res;
-
-    public Task(String task) {
-        indexes = new ArrayList<>();
-        times = new ArrayList<>();
+    private int id;
+    private int timeSum;
+    public Task(String task,int id) {
+        this.task=task;
+        this.id=id;
+        indexes = new LinkedList<>();
+        times = new LinkedList<>();
         String[] taskSplit = task.split(" ");
         for (int i = 0; i < taskSplit.length; i++) {
             if (i % 2 == 0) {
-                times.add(taskSplit[i]);
+                times.addLast(taskSplit[i]);
+                timeSum+=Integer.parseInt(taskSplit[i]);
             } else {
-                indexes.add(taskSplit[i]);
+                indexes.addLast(taskSplit[i]);
             }
         }
         res = 0;
@@ -25,8 +28,8 @@ public class Task {
 
     public String[] getTask() {
         String[] s = new String[2];
-        s[0] = times.remove(0);
-        s[1] = indexes.remove(0);
+        s[0] = times.peekFirst();
+        s[1] = indexes.peekFirst();
         return s;
     }
 
@@ -42,6 +45,47 @@ public class Task {
     }
 
 
+    public LinkedList<String> getIndexes() {
+        return indexes;
+    }
 
+    public void setIndexes(LinkedList<String> indexes) {
+        this.indexes = indexes;
+    }
 
+    public LinkedList<String> getTimes() {
+        return times;
+    }
+
+    public void setTimes(LinkedList<String> times) {
+        this.times = times;
+    }
+
+    public int getRes() {
+        return res;
+    }
+
+    public void setRes(int res) {
+        this.res = res;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTimeSum() {
+        return timeSum;
+    }
+
+    public void setTimeSum(int timeSum) {
+        this.timeSum = timeSum;
+    }
+
+    public String getTaskString() {
+        return task;
+    }
 }

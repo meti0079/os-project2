@@ -1,46 +1,63 @@
 package os;
 
-import master.MasterMain;
-
+import logMe.Logger;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class Server implements Runnable {
 
+    private Logger logger;
     private ServerSocket serverSocket;
     private Socket clientSocket;
+
     private int port;
     private int workerNumbers;
+    private int storegPort;
+    private int RRTime;
+
     private boolean running;
+
     private StorgeHandler storgeHandler;
 
+    private String alg;
+    private String deadlock;
 
 
 
     private ArrayList<WorkerHandler> workerHandlers;
     private ArrayList<Task> tasks;
-
+    private ArrayList<String> data;
 
     private ArrayList<Task> taskInProcesses;
-    private ArrayList<Task> taskWaitForOther;
-    private int pp=1;
+    private ArrayList<Task> taskFinished;
+    private int taskNum;
 
 
 
 
 
-    public Server(int port, int n, int programsNumber, int max_weight) {
+    public Server(int port, int n,ArrayList<String> data , ArrayList<Task> tasks,int storegPort,int RRTime,String alg,String deadlock) {
+       taskNum=tasks.size();
+        this.data=data;
         this.port = port;
+        this.storegPort=storegPort;
         workerNumbers = n;
         workerHandlers = new ArrayList<>();
-        tasks = new ArrayList<>();
+        this.tasks = tasks;
+        this.RRTime=RRTime;
+        this.deadlock=deadlock;
+        this.alg=alg;
+
         taskInProcesses =new ArrayList<>();
-        taskWaitForOther =new ArrayList<>();
+        taskFinished =new ArrayList<>();
+
+
         System.out.println("server start on port "+port);
+        logger =new Logger("server");
+        logger.write("server start on port "+port);
 
     }
 
@@ -55,25 +72,45 @@ public class Server implements Runnable {
         }
 
         while (running) {
-//                handleWorks();
+                handleWorks();
         }
     }
+
+    private void handleWorks() {
+
+
+
+
+
+
+    }
+
+
+
+    public void TaskFinished(Task task){
+        System.out.println("task "+task.getId()+" executed successfully with result "+task.getRes());
+        taskFinished.add(task);
+        if (taskFinished.size()==taskNum){
+            close();
+            System.exit(0);
+        }
+
+    }
+
+
+
 
     private void connect2Storge() {
         Socket socket= null;
         try {
-            socket = new Socket(InetAddress.getLocalHost(),100);
+            socket = new Socket(InetAddress.getLocalHost(),storegPort);
             storgeHandler=new StorgeHandler(socket);
-
+            logger.write("server conect to storge");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-
-
-
-
 
 
     private void waiteForWorkerConnection() throws IOException {
@@ -84,6 +121,7 @@ public class Server implements Runnable {
                 int id =x;
                 WorkerHandler workerHandler = new WorkerHandler(id, clientSocket, this);
                 workerHandlers.add(workerHandler);
+                logger.write("a worker connect to server "+x);
             } catch (IOException e) {
                 clientSocket.close();
                 e.printStackTrace();
@@ -100,8 +138,6 @@ public class Server implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
 
 
@@ -110,6 +146,7 @@ public class Server implements Runnable {
     public void close() {
         try {
             serverSocket.close();
+            logger.write("server closed!!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,6 +157,7 @@ public class Server implements Runnable {
 
     private void establishServer() throws IOException {
         serverSocket = new ServerSocket(port);
+        logger.write("server established");
     }
 
     public void start() {

@@ -12,8 +12,7 @@ public class WorkerHandler {
     private Socket clientSocket;
     private DataInputStream dis;
     private DataOutputStream dos;
-    private ArrayList<Task> tasks;
-    private ArrayList<Integer> workW;
+    private Task tasks;
     private String state;
     Server server;
 
@@ -25,8 +24,6 @@ public class WorkerHandler {
         this.clientSocket = clientSocket;
         this.dis = new DataInputStream(clientSocket.getInputStream());
         this.dos = new DataOutputStream(clientSocket.getOutputStream());
-        workW=new ArrayList<>();
-        tasks =new ArrayList<>();
         System.out.println(String.format("worker %d start",id));
         listenForRes();
     }
@@ -47,16 +44,14 @@ public class WorkerHandler {
     }
 
 
-    public void setWork(Task task, int w){
-//        String req= task.getProgram2done()+" "+ task.getInput()+ " "+ task.getPriority();
-//        tasks.add(task);
-//        weightworker+=w;
-//        workW.add(w);
-//        try {
-//            sendRequest(req);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    public void setTask2Worker(Task task){
+        String req= "TASK "+task.getTaskString();
+        tasks=task;
+        try {
+            sendRequest(req);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -70,6 +65,9 @@ public class WorkerHandler {
 
     private void handleRes(String res){
         String [] response=res.split(" ");
+        if (response[0].equalsIgnoreCase("response")){
+            server.
+        }
 
     }
 
@@ -82,18 +80,6 @@ public class WorkerHandler {
         this.id = id;
     }
 
-    public ArrayList<Task> getWorks() {
-        return tasks;
-    }
 
-    public boolean checkWorkerIsAlive() {
-        try {
-            if(dis.read()==-1){
-             return   false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
+
 }
