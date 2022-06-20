@@ -4,7 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class WorkerHandler {
     boolean running;
@@ -12,20 +11,19 @@ public class WorkerHandler {
     private Socket clientSocket;
     private DataInputStream dis;
     private DataOutputStream dos;
-    private Task tasks;
-    private String state;
+    private Task task;
     Server server;
 
 
     public WorkerHandler(int id, Socket clientSocket, Server server) throws IOException {
         this.id = id;
-        state="ALIVE";
         running=true;
         this.clientSocket = clientSocket;
         this.dis = new DataInputStream(clientSocket.getInputStream());
         this.dos = new DataOutputStream(clientSocket.getOutputStream());
         System.out.println(String.format("worker %d start",id));
         listenForRes();
+        this.server=server;
     }
     private void listenForRes(){
         Thread thread= new Thread(new Runnable() {
@@ -45,8 +43,8 @@ public class WorkerHandler {
 
 
     public void setTask2Worker(Task task){
-        String req= "TASK "+task.getTaskString();
-        tasks=task;
+        String req= "TASK "+task.getId()+" "+task.getTaskString();
+        this.task=task;
         try {
             sendRequest(req);
         } catch (IOException e) {
@@ -66,7 +64,15 @@ public class WorkerHandler {
     private void handleRes(String res){
         String [] response=res.split(" ");
         if (response[0].equalsIgnoreCase("response")){
-            server.
+            task.setRes(Integer.parseInt(response[1]));
+            server.TaskFinished(task);
+            task=null;
+
+        }else if (response[0].equalsIgnoreCase("taskUnFinished")){
+            int taskId= task.getId();
+            server.addTask(new Task(changeTask2String(response),taskId));
+            task=null;
+
         }
 
     }
@@ -80,6 +86,21 @@ public class WorkerHandler {
         this.id = id;
     }
 
+    public Task getTask(){
+        return task;
+    }
+    private String changeTask2String(String [] res){
+        String ss="";
+        for (int i = 1; i < res.length ; i++) {
+            if (i%2==1){
+                ss+=res[i];
+            }else {
+                ss+=(" "+res[i]);
+            }
+        }
+        System.out.println("changTask2String : "+ss);
+        return ss;
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package os;
 
 import logMe.Logger;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -17,47 +18,43 @@ public class Server implements Runnable {
     private int workerNumbers;
     private int storegPort;
     private int RRTime;
-
+    private int taskNum;
+    private int taskDone;
     private boolean running;
 
     private StorgeHandler storgeHandler;
 
-    private String alg;
+    private int alg;
     private String deadlock;
-
 
 
     private ArrayList<WorkerHandler> workerHandlers;
     private ArrayList<Task> tasks;
     private ArrayList<String> data;
-
     private ArrayList<Task> taskInProcesses;
-    private ArrayList<Task> taskFinished;
-    private int taskNum;
 
 
-
-
-
-    public Server(int port, int n,ArrayList<String> data , ArrayList<Task> tasks,int storegPort,int RRTime,String alg,String deadlock) {
-       taskNum=tasks.size();
-        this.data=data;
+    public Server(int port, int n, ArrayList<String> data, ArrayList<Task> tasks, int storegPort, int RRTime, String alg, String deadlock) {
+        taskNum = tasks.size();
+        this.data = data;
         this.port = port;
-        this.storegPort=storegPort;
+        this.storegPort = storegPort;
         workerNumbers = n;
         workerHandlers = new ArrayList<>();
         this.tasks = tasks;
-        this.RRTime=RRTime;
-        this.deadlock=deadlock;
-        this.alg=alg;
+        this.RRTime = RRTime;
+        this.deadlock = deadlock;
+        if (alg.equalsIgnoreCase("FCFS")) this.alg = 1;
+        if (alg.equalsIgnoreCase("RR")) this.alg = 1;
+        if (alg.equalsIgnoreCase("SJF")) this.alg = 1;
 
-        taskInProcesses =new ArrayList<>();
-        taskFinished =new ArrayList<>();
+
+        taskInProcesses = new ArrayList<>();
 
 
-        System.out.println("server start on port "+port);
-        logger =new Logger("server");
-        logger.write("server start on port "+port);
+        System.out.println("server start on port " + port);
+        logger = new Logger("server");
+        logger.write("server start on port " + port);
 
     }
 
@@ -67,81 +64,123 @@ public class Server implements Runnable {
         try {
             waiteForWorkerConnection();
             connect2Storge();
+            pushDataOnStorge();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         while (running) {
-                handleWorks();
+            handleWorks();
+        }
+    }
+
+    private void pushDataOnStorge() throws IOException {
+        for (int i = 0; i < taskNum; i++) {
+            storgeHandler.sendRequest("push " + data.get(i));
         }
     }
 
     private void handleWorks() {
-
-
-
-
-
-
-    }
-
-
-
-    public void TaskFinished(Task task){
-        System.out.println("task "+task.getId()+" executed successfully with result "+task.getRes());
-        taskFinished.add(task);
-        if (taskFinished.size()==taskNum){
-            close();
-            System.exit(0);
+        sleep(1);
+        WorkerHandler workerHandler = getWorker();
+        Task task = getTask();
+        if (workerHandler != null && task != null) {
+            workerHandler.setTask2Worker(task);
         }
 
+
+    }
+
+    private Task getTask() {
+        switch (alg) {
+            case 1:
+                return FCFS();
+            case 2:
+                return RR();
+            case 3:
+                return SJF();
+        }
+        return null;
+    }
+
+    private Task SJF() {
+        if (tasks.size() == 0) {
+            return null;
+        }
+        Task t = tasks.get(0);
+        int time = Integer.MAX_VALUE;
+        for (int j = 1; j < tasks.size(); j++) {
+            if (time > tasks.get(j).getTimeSum()) {
+                t = tasks.get(j);
+                time = tasks.get(j).getTimeSum();
+            }
+        }
+        tasks.remove(t);
+        return t;
+    }
+
+    private Task RR() {
+        return null;
+    }
+
+    private Task FCFS() {
+        return tasks.remove(0);
+    }
+
+    private WorkerHandler getWorker() {
+        for (WorkerHandler workerHandler : workerHandlers) {
+            if (workerHandler.getTask() == null) {
+                return workerHandler;
+            }
+        }
+        return null;
     }
 
 
+    public void TaskFinished(Task task) {
+        System.out.println("task " + task.getId() + " executed successfully with result " + task.getRes());
+        taskDone++;
+        if (taskDone == taskNum) {
+            System.exit(0);
+        }
+    }
 
 
     private void connect2Storge() {
-        Socket socket= null;
+        Socket socket = null;
         try {
-            socket = new Socket(InetAddress.getLocalHost(),storegPort);
-            storgeHandler=new StorgeHandler(socket);
-            logger.write("server conect to storge");
+            socket = new Socket(InetAddress.getLocalHost(), storegPort);
+            storgeHandler = new StorgeHandler(socket);
+            logger.write("server conect to storge with port : " + storegPort);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-
     private void waiteForWorkerConnection() throws IOException {
-        int x=0;
-        while (x<workerNumbers) {
+        int x = 0;
+        while (x < workerNumbers) {
             try {
                 clientSocket = this.serverSocket.accept();
-                int id =x;
+                int id = x;
                 WorkerHandler workerHandler = new WorkerHandler(id, clientSocket, this);
                 workerHandlers.add(workerHandler);
-                logger.write("a worker connect to server "+x);
+                logger.write("a worker connect to server " + x);
             } catch (IOException e) {
-                clientSocket.close();
                 e.printStackTrace();
             }
             x++;
         }
     }
 
-
-
-    private void sleep() {
+    private void sleep(int x) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(x);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-
-
 
     public void close() {
         try {
@@ -152,8 +191,6 @@ public class Server implements Runnable {
         }
         this.running = false;
     }
-
-
 
     private void establishServer() throws IOException {
         serverSocket = new ServerSocket(port);
@@ -171,5 +208,7 @@ public class Server implements Runnable {
         thread.start();
     }
 
-
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
 }

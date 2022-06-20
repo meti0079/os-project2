@@ -86,6 +86,11 @@ public class Task {
     }
 
     public String getTaskString() {
-        return task;
+        String x="";
+        for (int i = 0; i < indexes.size(); i++) {
+                x+=times.get(i);
+                x+=(" "+indexes.get(i));
+        }
+        return x;
     }
 }
