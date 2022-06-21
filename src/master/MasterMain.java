@@ -5,6 +5,8 @@ import os.Worker;
 import os.Server;
 import os.Storge;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class MasterMain {
     private static ArrayList<Process> proccess;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         proccess = new ArrayList<>();
         command = new LinkedList<>();
         tasks = new ArrayList<>();
@@ -38,8 +40,14 @@ public class MasterMain {
             Thread.sleep(500);
             Server server = new Server(port, workerNumber, data, tasks, storegPort, RRTime, alg, deadlock);
             server.start();
-            Thread.sleep(500);
-
+            Thread.sleep(1000);
+            command.remove(command.size() - 1);
+            command.remove(command.size() - 1);
+            command.remove(command.size() - 1);
+            String className = Worker.class.getName();
+            command.add(className);
+            command.add(String.valueOf(storegPort));
+            command.add(String.valueOf(port));
             for (int i = 0; i < workerNumber; i++) {
                 makeWorker();
             }
@@ -57,6 +65,7 @@ public class MasterMain {
         try {
             command.add(className);
             command.add(String.valueOf(storegPort));
+            command.add(String.valueOf(workerNumber));
             System.out.println(command);
             ProcessBuilder builder = new ProcessBuilder(command);
             Process process = builder.start();
@@ -77,12 +86,9 @@ public class MasterMain {
     }
 
     public static void makeWorker() {
-        String className = Worker.class.getName();
         try {
-            command.remove(command.size() - 1);
-            command.remove(command.size() - 1);
-            command.add(className);
-            command.add(String.valueOf(storegPort));
+
+
             System.out.println(command);
             ProcessBuilder builder = new ProcessBuilder(command);
             Process process = builder.start();
@@ -104,8 +110,8 @@ public class MasterMain {
     }
 
 
-    public static void readInputs() {
-        Scanner scanner = new Scanner(System.in);
+    public static void readInputs() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("C:\\Users\\Mehdi\\IdeaProjects\\OS_HW2\\input5.txt"));
         int argNum = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < argNum; i++) {
             command.add(scanner.nextLine());

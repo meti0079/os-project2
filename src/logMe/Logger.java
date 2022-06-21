@@ -12,7 +12,7 @@ public class Logger {
 
     public Logger(String name){
         try {
-            logger=new FileWriter("."+name+".log");
+            logger=new FileWriter(name+".log");
         } catch (IOException e) {
             e.printStackTrace();
         }

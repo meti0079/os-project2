@@ -26,10 +26,10 @@ public class Task {
         res = 0;
     }
 
-    public String[] getTask() {
+    public String[] getSubTask() {
         String[] s = new String[2];
-        s[0] = times.peekFirst();
-        s[1] = indexes.peekFirst();
+        s[0] = times.pollFirst();
+        s[1] = indexes.pollFirst();
         return s;
     }
 
@@ -89,8 +89,8 @@ public class Task {
         String x="";
         for (int i = 0; i < indexes.size(); i++) {
                 x+=times.get(i);
-                x+=(" "+indexes.get(i));
+                x+=(" "+indexes.get(i)+" ");
         }
-        return x;
+        return x.substring(0,x.length()-1);
     }
 }

@@ -25,6 +25,7 @@ public class WorkerHandler {
         listenForRes();
         this.server=server;
     }
+
     private void listenForRes(){
         Thread thread= new Thread(new Runnable() {
             @Override
@@ -41,7 +42,6 @@ public class WorkerHandler {
         thread.start();
     }
 
-
     public void setTask2Worker(Task task){
         String req= "TASK "+task.getId()+" "+task.getTaskString();
         this.task=task;
@@ -52,12 +52,11 @@ public class WorkerHandler {
         }
     }
 
-
-    private void sendRequest(String request) throws IOException {
+    public void sendRequest(String request) throws IOException {
         dos.writeUTF(request);
     }
 
-    private String listenForResponse() throws IOException {
+    public String listenForResponse() throws IOException {
         return dis.readUTF();
     }
 
@@ -72,9 +71,7 @@ public class WorkerHandler {
             int taskId= task.getId();
             server.addTask(new Task(changeTask2String(response),taskId));
             task=null;
-
         }
-
     }
 
 

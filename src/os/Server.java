@@ -45,12 +45,10 @@ public class Server implements Runnable {
         this.RRTime = RRTime;
         this.deadlock = deadlock;
         if (alg.equalsIgnoreCase("FCFS")) this.alg = 1;
-        if (alg.equalsIgnoreCase("RR")) this.alg = 1;
-        if (alg.equalsIgnoreCase("SJF")) this.alg = 1;
-
+        if (alg.equalsIgnoreCase("RR")) this.alg =2;
+        if (alg.equalsIgnoreCase("SJF")) this.alg = 3;
 
         taskInProcesses = new ArrayList<>();
-
 
         System.out.println("server start on port " + port);
         logger = new Logger("server");
@@ -62,9 +60,11 @@ public class Server implements Runnable {
     @Override
     public void run() {
         try {
-            waiteForWorkerConnection();
             connect2Storge();
             pushDataOnStorge();
+            sleep(1000);
+            waiteForWorkerConnection();
+            sleep(1000);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,9 +75,12 @@ public class Server implements Runnable {
     }
 
     private void pushDataOnStorge() throws IOException {
-        for (int i = 0; i < taskNum; i++) {
+        for (int i = 0; i < data.size(); i++) {
             storgeHandler.sendRequest("push " + data.get(i));
+            logger.write("pushed "+data.get(i)+" on storge");
         }
+        storgeHandler.sendRequest("worker " + workerNumbers);
+        logger.write("pushed worker numbers"+ workerNumbers+" on storge");
     }
 
     private void handleWorks() {
@@ -85,7 +88,10 @@ public class Server implements Runnable {
         WorkerHandler workerHandler = getWorker();
         Task task = getTask();
         if (workerHandler != null && task != null) {
+            logger.write("worker "+workerHandler.getId()+" and task "+task.getId()+" choose");
             workerHandler.setTask2Worker(task);
+            removeTask(task.getId());
+
         }
 
 
@@ -103,27 +109,27 @@ public class Server implements Runnable {
         return null;
     }
 
-    private Task SJF() {
+    private synchronized Task SJF() {
         if (tasks.size() == 0) {
             return null;
         }
         Task t = tasks.get(0);
-        int time = Integer.MAX_VALUE;
+        int time = tasks.get(0).getTimeSum();
         for (int j = 1; j < tasks.size(); j++) {
             if (time > tasks.get(j).getTimeSum()) {
                 t = tasks.get(j);
                 time = tasks.get(j).getTimeSum();
             }
         }
-        tasks.remove(t);
         return t;
     }
 
-    private Task RR() {
+    private synchronized Task RR() {
         return null;
     }
 
-    private Task FCFS() {
+    private synchronized Task FCFS() {
+        if (tasks.size()==0)return null;
         return tasks.remove(0);
     }
 
@@ -137,11 +143,20 @@ public class Server implements Runnable {
     }
 
 
-    public void TaskFinished(Task task) {
+    public synchronized void TaskFinished(Task task) {
         System.out.println("task " + task.getId() + " executed successfully with result " + task.getRes());
         taskDone++;
         if (taskDone == taskNum) {
             System.exit(0);
+        }
+    }
+
+    private void removeTask(int id) {
+        for (int i=0;i<tasks.size();i++) {
+            if (tasks.get(i).getId()==id) {
+                tasks.remove(i);
+                break;
+            }
         }
     }
 
@@ -208,7 +223,7 @@ public class Server implements Runnable {
         thread.start();
     }
 
-    public void addTask(Task task) {
+    public synchronized void addTask(Task task) {
         tasks.add(task);
     }
 }
