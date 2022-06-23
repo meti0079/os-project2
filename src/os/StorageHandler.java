@@ -5,14 +5,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class StorgeHandler {
+public class StorageHandler {
 
     private Socket clientSocket;
     private DataInputStream dis;
     private DataOutputStream dos;
 
 
-    public StorgeHandler(Socket clientSocket) throws IOException {
+    public StorageHandler(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
         this.dis = new DataInputStream(clientSocket.getInputStream());
         this.dos = new DataOutputStream(clientSocket.getOutputStream());

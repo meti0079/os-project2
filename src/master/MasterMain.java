@@ -1,9 +1,10 @@
 package master;
 
+import logMe.Logger;
+import os.Storage;
 import os.Task;
 import os.Worker;
 import os.Server;
-import os.Storge;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +15,7 @@ import java.util.Scanner;
 
 public class MasterMain {
     public static int port;
-    public static int storegPort;
+    public static int storagePort;
     public static int workerNumber;
     public static int RRTime;
     public static int workNumber;
@@ -28,6 +29,8 @@ public class MasterMain {
 
 
     public static void main(String[] args) throws FileNotFoundException {
+        Logger.getInstance().clear();
+        Logger.getInstance().setName("master");
         proccess = new ArrayList<>();
         command = new LinkedList<>();
         tasks = new ArrayList<>();
@@ -36,9 +39,9 @@ public class MasterMain {
         readInputs();
 
         try {
-            makeStorge();
+            makeStorage();
             Thread.sleep(500);
-            Server server = new Server(port, workerNumber, data, tasks, storegPort, RRTime, alg, deadlock);
+            Server server = new Server(port, workerNumber, data, tasks, storagePort, RRTime, alg, deadlock);
             server.start();
             Thread.sleep(1000);
             command.remove(command.size() - 1);
@@ -46,7 +49,7 @@ public class MasterMain {
             command.remove(command.size() - 1);
             String className = Worker.class.getName();
             command.add(className);
-            command.add(String.valueOf(storegPort));
+            command.add(String.valueOf(storagePort));
             command.add(String.valueOf(port));
             for (int i = 0; i < workerNumber; i++) {
                 makeWorker();
@@ -60,11 +63,11 @@ public class MasterMain {
         }
     }
 
-    public static void makeStorge() {
-        String className = Storge.class.getName();
+    public static void makeStorage() {
+        String className = Storage.class.getName();
         try {
             command.add(className);
-            command.add(String.valueOf(storegPort));
+            command.add(String.valueOf(storagePort));
             command.add(String.valueOf(workerNumber));
             System.out.println(command);
             ProcessBuilder builder = new ProcessBuilder(command);
@@ -109,9 +112,8 @@ public class MasterMain {
 
     }
 
-
     public static void readInputs() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("C:\\Users\\Mehdi\\IdeaProjects\\OS_HW2\\input5.txt"));
+        Scanner scanner = new Scanner(new File("C:\\Users\\Mehdi\\IdeaProjects\\OS_HW2\\input12.txt"));
         int argNum = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < argNum; i++) {
             command.add(scanner.nextLine());
@@ -122,7 +124,7 @@ public class MasterMain {
         alg = scanner.nextLine();
         if (alg.equalsIgnoreCase("RR")) RRTime = Integer.parseInt(scanner.nextLine());
         deadlock = scanner.nextLine();
-        storegPort = Integer.parseInt(scanner.nextLine());
+        storagePort = Integer.parseInt(scanner.nextLine());
         String d = scanner.nextLine();
         String ds[] = d.split(" ");
         for (String s : ds) {

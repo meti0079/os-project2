@@ -1,5 +1,7 @@
 package os;
 
+import logMe.Logger;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,9 +15,11 @@ public class WorkerHandler {
     private DataOutputStream dos;
     private Task task;
     Server server;
+    Object lock;
 
 
     public WorkerHandler(int id, Socket clientSocket, Server server) throws IOException {
+        lock=new Object();
         this.id = id;
         running=true;
         this.clientSocket = clientSocket;
@@ -43,7 +47,7 @@ public class WorkerHandler {
     }
 
     public void setTask2Worker(Task task){
-        String req= "TASK "+task.getId()+" "+task.getTaskString();
+        String req= "TASK "+task.getTaskString();
         this.task=task;
         try {
             sendRequest(req);
@@ -61,16 +65,27 @@ public class WorkerHandler {
     }
 
     private void handleRes(String res){
+        Logger.getInstance().write("mesage : "+res);
         String [] response=res.split(" ");
         if (response[0].equalsIgnoreCase("response")){
             task.setRes(Integer.parseInt(response[1]));
             server.TaskFinished(task);
             task=null;
+            synchronized (lock){
+                lock.notify();
+            }
 
         }else if (response[0].equalsIgnoreCase("taskUnFinished")){
-            int taskId= task.getId();
-            server.addTask(new Task(changeTask2String(response),taskId));
-            task=null;
+            this.task=null;
+            int taskId= Integer.parseInt(response[response.length-2]);
+            Task task= new Task(changeTask2String(response),taskId);
+            task.setRes(Integer.parseInt(response[response.length-1]));
+            server.addTask(task);
+            Logger.getInstance().write("task unfinished");
+            synchronized (lock){
+                lock.notify();
+            }
+            Logger.getInstance().write("task unfinished notify");
         }
     }
 
@@ -88,15 +103,15 @@ public class WorkerHandler {
     }
     private String changeTask2String(String [] res){
         String ss="";
-        for (int i = 1; i < res.length ; i++) {
+        for (int i = 1; i < res.length-1 ; i++) {
             if (i%2==1){
                 ss+=res[i];
             }else {
-                ss+=(" "+res[i]);
+                ss+=(" "+res[i]+" ");
             }
         }
         System.out.println("changTask2String : "+ss);
-        return ss;
+        return ss.substring(0,ss.length()-1);
     }
 
 

@@ -22,7 +22,7 @@ public class Server implements Runnable {
     private int taskDone;
     private boolean running;
 
-    private StorgeHandler storgeHandler;
+    private StorageHandler storageHandler;
 
     private int alg;
     private String deadlock;
@@ -45,13 +45,13 @@ public class Server implements Runnable {
         this.RRTime = RRTime;
         this.deadlock = deadlock;
         if (alg.equalsIgnoreCase("FCFS")) this.alg = 1;
-        if (alg.equalsIgnoreCase("RR")) this.alg =2;
+        if (alg.equalsIgnoreCase("RR")) this.alg = 2;
         if (alg.equalsIgnoreCase("SJF")) this.alg = 3;
 
         taskInProcesses = new ArrayList<>();
 
         System.out.println("server start on port " + port);
-        logger = new Logger("server");
+        logger = Logger.getInstance();
         logger.write("server start on port " + port);
 
     }
@@ -60,41 +60,80 @@ public class Server implements Runnable {
     @Override
     public void run() {
         try {
-            connect2Storge();
-            pushDataOnStorge();
+            connect2Storage();
+            pushDataOnStorage();
             sleep(1000);
             waiteForWorkerConnection();
             sleep(1000);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        handleWorks();
 
-        while (running) {
-            handleWorks();
-        }
     }
 
-    private void pushDataOnStorge() throws IOException {
+    private void pushDataOnStorage() throws IOException {
         for (int i = 0; i < data.size(); i++) {
-            storgeHandler.sendRequest("push " + data.get(i));
-            logger.write("pushed "+data.get(i)+" on storge");
+            storageHandler.sendRequest("push " + data.get(i));
+            logger.write("pushed " + data.get(i) + " on storage");
         }
-        storgeHandler.sendRequest("worker " + workerNumbers);
-        logger.write("pushed worker numbers"+ workerNumbers+" on storge");
+        storageHandler.sendRequest("worker " + workerNumbers);
+        logger.write("pushed worker numbers" + workerNumbers + " on storage");
+    }
+
+    private void RRHandling() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (running) {
+                        sleep(RRTime);
+                        for (WorkerHandler workerHandler : workerHandlers) {
+                            if (workerHandler.getTask() != null) {
+                                workerHandler.sendRequest("intrupt " + workerHandler.getTask().getId());
+                                synchronized (workerHandler.lock) {
+                                    workerHandler.lock.wait();
+                                }
+
+                            }
+                        }
+                        //TODO remove all queue in storage
+                        for (WorkerHandler workerHandler:workerHandlers) {
+                            Task task=getTask();
+                            if (task!=null){
+                                workerHandler.setTask2Worker(task);
+                                tasks.remove(task);
+                            }
+                        }
+                    }
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+        thread.start();
+
     }
 
     private void handleWorks() {
-        sleep(1);
-        WorkerHandler workerHandler = getWorker();
-        Task task = getTask();
-        if (workerHandler != null && task != null) {
-            logger.write("worker "+workerHandler.getId()+" and task "+task.getId()+" choose");
-            workerHandler.setTask2Worker(task);
-            removeTask(task.getId());
+        if (alg == 2) {
+            RRHandling();
+            return;
+        }
+        while (running) {
+            sleep(1);
+
+            WorkerHandler workerHandler = getWorker();
+            Task task = getTask();
+            if (workerHandler != null && task != null) {
+                logger.write("worker " + workerHandler.getId() + " and task " + task.getId() + " choose");
+                workerHandler.setTask2Worker(task);
+                removeTask(task.getId());
+
+            }
 
         }
-
-
     }
 
     private Task getTask() {
@@ -125,12 +164,12 @@ public class Server implements Runnable {
     }
 
     private synchronized Task RR() {
-        return null;
+        return FCFS();
     }
 
     private synchronized Task FCFS() {
-        if (tasks.size()==0)return null;
-        return tasks.remove(0);
+        if (tasks.size() == 0) return null;
+        return tasks.get(0);
     }
 
     private WorkerHandler getWorker() {
@@ -152,8 +191,8 @@ public class Server implements Runnable {
     }
 
     private void removeTask(int id) {
-        for (int i=0;i<tasks.size();i++) {
-            if (tasks.get(i).getId()==id) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getId() == id) {
                 tasks.remove(i);
                 break;
             }
@@ -161,12 +200,12 @@ public class Server implements Runnable {
     }
 
 
-    private void connect2Storge() {
+    private void connect2Storage() {
         Socket socket = null;
         try {
             socket = new Socket(InetAddress.getLocalHost(), storegPort);
-            storgeHandler = new StorgeHandler(socket);
-            logger.write("server conect to storge with port : " + storegPort);
+            storageHandler = new StorageHandler(socket);
+            logger.write("server conect to storage with port : " + storegPort);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -225,5 +264,16 @@ public class Server implements Runnable {
 
     public synchronized void addTask(Task task) {
         tasks.add(task);
+    }
+
+    public synchronized void getTaskFromWorker(int taskID) throws IOException {
+        logger.write("a task time finished with id : " + taskID);
+        for (WorkerHandler workerHandler : workerHandlers) {
+            if (workerHandler.getTask() != null && workerHandler.getTask().getId() == taskID) {
+                workerHandler.sendRequest("intrupt " + workerHandler.getTask().getId());
+                logger.write("intrupt send to worker " + workerHandler.getId() + "for task " + taskID);
+                break;
+            }
+        }
     }
 }

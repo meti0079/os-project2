@@ -9,13 +9,13 @@ public class Connection {
     private Socket socket;
     private DataOutputStream outputStream;
     private DataInputStream dataInputStream;
-    private Storge storge;
+    private Storage storage;
 
 
-    public Connection(Socket socket,Storge storge) throws IOException {
+    public Connection(Socket socket, Storage storage) throws IOException {
         this.socket=socket;
         dataInputStream= new DataInputStream(socket.getInputStream());
-        this.storge=storge;
+        this.storage = storage;
         outputStream= new DataOutputStream(socket.getOutputStream());
         listenForRes();
 
@@ -29,7 +29,7 @@ public class Connection {
                 while (true){
                     try {
                         String s=listenForResponse();
-                        storge.handleRequest(s,Connection.this);
+                        storage.handleRequest(s,Connection.this);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

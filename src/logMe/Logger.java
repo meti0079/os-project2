@@ -1,31 +1,48 @@
 package logMe;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.sql.Timestamp;
 
 public class Logger {
-    private FileWriter logger;
+    private PrintStream writer;
+    private final String addres="log.txt";
+    private static Logger logger;
+    private  String name;
 
 
-
-
-
-    public Logger(String name){
+    private Logger(){
         try {
-            logger=new FileWriter(name+".log");
+            writer =new PrintStream(new FileOutputStream(addres,true));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void write(String message){
+
+    public static Logger getInstance(){
+        if (logger ==null) logger = new Logger();
+        return logger;
+    }
+
+    public void setName(String name){
+        logger.name=name;
+    }
+
+
+    public synchronized void write(String message){
+        logger.writer.print(logger.name+" : "+message+"///time : "+ new Timestamp(System.currentTimeMillis()).toString()+"\n");
+        logger.writer.flush();
+    }
+
+    public void clear()  {
         try {
-            logger.write(message);
-            logger.write("\n");
-            logger.flush();
-        } catch (IOException e) {
+            PrintWriter  printWriter= new PrintWriter(addres);
+            printWriter.print("");
+            printWriter.close();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
     }
 
 

@@ -9,6 +9,9 @@ public class Task {
     private int res;
     private int id;
     private int timeSum;
+    private  String lastIndex;
+    private String lastTime;
+    private Integer lastData;
     public Task(String task,int id) {
         this.task=task;
         this.id=id;
@@ -30,6 +33,8 @@ public class Task {
         String[] s = new String[2];
         s[0] = times.pollFirst();
         s[1] = indexes.pollFirst();
+        lastIndex=s[1];
+        lastTime=s[0];
         return s;
     }
 
@@ -91,6 +96,32 @@ public class Task {
                 x+=times.get(i);
                 x+=(" "+indexes.get(i)+" ");
         }
-        return x.substring(0,x.length()-1);
+        x+=id+" "+res;
+        return x;
+    }
+
+    public String getLastIndex() {
+        return lastIndex;
+    }
+
+    public void setLastIndex(String lastIndex) {
+        this.lastIndex = lastIndex;
+    }
+
+
+    public void setLastTime(String lastTime) {
+        this.lastTime = lastTime;
+    }
+    public void intruptInSleep(String lastTime){
+        times.addFirst(lastTime);
+        indexes.addFirst(lastIndex);
+    }
+
+    public Integer getLastData() {
+        return lastData;
+    }
+
+    public void setLastData(Integer lastData) {
+        this.lastData = lastData;
     }
 }
