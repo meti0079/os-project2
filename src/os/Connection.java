@@ -10,6 +10,7 @@ public class Connection {
     private DataOutputStream outputStream;
     private DataInputStream dataInputStream;
     private Storage storage;
+    private String ID;
 
 
     public Connection(Socket socket, Storage storage) throws IOException {
@@ -17,6 +18,7 @@ public class Connection {
         dataInputStream= new DataInputStream(socket.getInputStream());
         this.storage = storage;
         outputStream= new DataOutputStream(socket.getOutputStream());
+        ID="-1";
         listenForRes();
 
     }
@@ -48,5 +50,11 @@ public class Connection {
         return dataInputStream.readUTF();
     }
 
+    public void setTaskID(String id){
+        this.ID=id;
+    }
 
+    public String getTaskID(){
+        return ID;
+    }
 }

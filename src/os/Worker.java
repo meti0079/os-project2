@@ -92,6 +92,7 @@ public class Worker {
                 int id = Integer.parseInt(req[req.length-2]);
                 task = new Task(changeTask2String(req), id);
                 task.setRes(Integer.parseInt(req[req.length-1]));
+                storageHandler.sendRequest("MYTASK "+id);
                 handleTask(task);
             } else if (req[0].equalsIgnoreCase("intrupt")) {
                 logger.write(" in intrupt handlling");
@@ -99,8 +100,6 @@ public class Worker {
                     lock.notify();
                     logger.write("notif ");
                 }
-            } else if (req[0].equalsIgnoreCase("preemption")) {
-                //TODO
             }
         }
     }
@@ -114,6 +113,7 @@ public class Worker {
                     try {
                         if (task.idDone()) {
                             dos.writeUTF("response " + task.getRes());
+//                            storageHandler.sendRequest("released "+task.getId());
                             break;
                         }
                         String s[] = task.getSubTask();
@@ -122,6 +122,7 @@ public class Worker {
                             task.setLastTime("0");
                         } else {
                             dos.writeUTF("taskUnFinished " + task.getTaskString());
+                            storageHandler.sendRequest("IAMINTRUPT "+task.getId());
                             logger.write("send task unfinished to server ");
                             break;
                         }
@@ -132,6 +133,7 @@ public class Worker {
                         } else {
                             logger.write("task intrupt in wait for storage ");
                             task.intruptInSleep("0");
+                            storageHandler.sendRequest("IAMINTRUPT "+task.getId());
                             dos.writeUTF("taskUnFinished " + task.getTaskString());
                             break;
                         }

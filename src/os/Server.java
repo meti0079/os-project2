@@ -184,6 +184,12 @@ public class Server implements Runnable {
 
     public synchronized void TaskFinished(Task task) {
         System.out.println("task " + task.getId() + " executed successfully with result " + task.getRes());
+        try {
+            storageHandler.sendRequest("released "+task.getId());
+            logger.write("released "+task.getId()+"  to storage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         taskDone++;
         if (taskDone == taskNum) {
             System.exit(0);
