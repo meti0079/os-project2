@@ -94,28 +94,28 @@ public class Storage {
             int id = Integer.parseInt(reqSplited[1]);
             for (int i = 0; i < dataLeader.size(); i++) {
                 if (dataLeader.get(i).equalsIgnoreCase(String.valueOf(id))) {
-                    logger.write("found one "+i+" in hand task "+id);
+                    logger.write("found one " + i + " in hand task " + id);
                     if (queues.get(i).isEmpty()) {
                         logger.write("queue is empty ");
                         dataLeader.set(i, "-1");
                     } else {
                         dataLeader.set(i, (String) queues.get(i).poll());
-                        logger.write("queue is not empty so has to sent to "+dataLeader.get(i)+" data"+dataValue.get(i));
-                        sendDataToTask(dataLeader.get(i),dataValue.get(i));
+                        logger.write("queue is not empty so has to sent to " + dataLeader.get(i) + " data" + dataValue.get(i));
+                        sendDataToTask(dataLeader.get(i), dataValue.get(i));
                     }
                 }
             }
 
         } else if (reqSplited[0].equalsIgnoreCase("worker")) {
             workerNumber = Integer.parseInt(reqSplited[1]);
-        }else if (reqSplited[0].equalsIgnoreCase("MYTASK")){
+        } else if (reqSplited[0].equalsIgnoreCase("MYTASK")) {
             connection.setTaskID(reqSplited[1]);
-            logger.write("my task id now "+connection.getTaskID());
-        }else if (reqSplited[0].equalsIgnoreCase("IAMINTRUPT")){
+            logger.write("my task id now " + connection.getTaskID());
+        } else if (reqSplited[0].equalsIgnoreCase("IAMINTRUPT")) {
             for (int i = 0; i < queues.size(); i++) {
-                LinkedList<String> queue= queues.get(i);
+                LinkedList<String> queue = queues.get(i);
                 for (int j = 0; j < queue.size(); j++) {
-                    if (queue.get(j).equalsIgnoreCase(reqSplited[1])){
+                    if (queue.get(j).equalsIgnoreCase(reqSplited[1])) {
                         queue.remove(j);
                         break;
                     }
@@ -123,14 +123,32 @@ public class Storage {
             }
 
 
+        } else if (reqSplited[0].equalsIgnoreCase("prevention")) {
+            String id = reqSplited[1];
+            ArrayList<String> indexes = new ArrayList<>();
+            for (int i = 2; i < reqSplited.length; i++) {
+                indexes.add(reqSplited[i]);
+            }
+            for (int i = 0; i < indexes.size(); i++) {
+                if (dataLeader.get(Integer.parseInt(indexes.get(i))).equalsIgnoreCase(id) || dataLeader.get(Integer.parseInt(indexes.get(i))).equalsIgnoreCase("-1")) {
+
+                } else {
+                    connection.sendRequest("true");
+                    return true;
+                }
+            }
+            for (int i = 0; i < indexes.size(); i++) {
+                dataLeader.set(Integer.parseInt(indexes.get(i)),id);
+            }
+            connection.sendRequest("false");
         }
 
         return true;
     }
 
-    private void sendDataToTask(String id,String value) throws IOException {
+    private void sendDataToTask(String id, String value) throws IOException {
         for (Connection connection : connections) {
-            if (connection.getTaskID().equalsIgnoreCase(id)){
+            if (connection.getTaskID().equalsIgnoreCase(id)) {
                 logger.write("found a worker to sent value");
                 connection.sendRequest("answer " + value);
             }

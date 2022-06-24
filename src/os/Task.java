@@ -42,9 +42,6 @@ public class Task {
         return times.isEmpty();
     }
 
-    public int getAnswer(){
-        return res;
-    }
     public void miniTaskDone(int x){
         res+=x;
     }
@@ -54,16 +51,9 @@ public class Task {
         return indexes;
     }
 
-    public void setIndexes(LinkedList<String> indexes) {
-        this.indexes = indexes;
-    }
 
     public LinkedList<String> getTimes() {
         return times;
-    }
-
-    public void setTimes(LinkedList<String> times) {
-        this.times = times;
     }
 
     public int getRes() {
@@ -76,10 +66,6 @@ public class Task {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getTimeSum() {
@@ -123,5 +109,12 @@ public class Task {
 
     public void setLastData(Integer lastData) {
         this.lastData = lastData;
+    }
+    public String getTaskRes(){
+        String s="";
+        for (String s1:indexes) {
+            s+=s1+" ";
+        }
+        return s.substring(0,s.length()-1);
     }
 }

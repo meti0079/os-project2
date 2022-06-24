@@ -13,7 +13,6 @@ public class Server implements Runnable {
     private Logger logger;
     private ServerSocket serverSocket;
     private Socket clientSocket;
-
     private int port;
     private int workerNumbers;
     private int storegPort;
@@ -21,20 +20,17 @@ public class Server implements Runnable {
     private int taskNum;
     private int taskDone;
     private boolean running;
-
     private StorageHandler storageHandler;
-
     private int alg;
     private String deadlock;
-
-
     private ArrayList<WorkerHandler> workerHandlers;
     private ArrayList<Task> tasks;
     private ArrayList<String> data;
-    private ArrayList<Task> taskInProcesses;
-
-
+    private ArrayList<Task> taskHaveDeadlock;
+    private Object lock;
+    private  boolean deadlockBool;
     public Server(int port, int n, ArrayList<String> data, ArrayList<Task> tasks, int storegPort, int RRTime, String alg, String deadlock) {
+        lock=new Object();
         taskNum = tasks.size();
         this.data = data;
         this.port = port;
@@ -48,7 +44,7 @@ public class Server implements Runnable {
         if (alg.equalsIgnoreCase("RR")) this.alg = 2;
         if (alg.equalsIgnoreCase("SJF")) this.alg = 3;
 
-        taskInProcesses = new ArrayList<>();
+        taskHaveDeadlock = new ArrayList<>();
 
         System.out.println("server start on port " + port);
         logger = Logger.getInstance();
@@ -98,9 +94,9 @@ public class Server implements Runnable {
                             }
                         }
                         //TODO remove all queue in storage
-                        for (WorkerHandler workerHandler:workerHandlers) {
-                            Task task=getTask();
-                            if (task!=null){
+                        for (WorkerHandler workerHandler : workerHandlers) {
+                            Task task = getTask();
+                            if (task != null) {
                                 workerHandler.setTask2Worker(task);
                                 tasks.remove(task);
                             }
@@ -117,23 +113,73 @@ public class Server implements Runnable {
     }
 
     private void handleWorks() {
+        handleTaskWithDeadlock();
         if (alg == 2) {
             RRHandling();
             return;
         }
         while (running) {
             sleep(1);
-
             WorkerHandler workerHandler = getWorker();
             Task task = getTask();
             if (workerHandler != null && task != null) {
-                logger.write("worker " + workerHandler.getId() + " and task " + task.getId() + " choose");
-                workerHandler.setTask2Worker(task);
-                removeTask(task.getId());
+                if (!haveDeadLock(task)) {
+                    logger.write("worker " + workerHandler.getId() + " and task " + task.getId() + " choose");
+                    workerHandler.setTask2Worker(task);
+                    removeTask(task.getId());
 
+                } else {
+                    synchronized (taskHaveDeadlock) {
+                        taskHaveDeadlock.add(task);
+                        removeTask(task.getId());
+                        logger.write("task " + task.getId() + " have deadlock");
+                    }
+                }
             }
 
+
         }
+    }
+
+    private void handleTaskWithDeadlock() {
+        Thread thread= new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    sleep(100);
+                    if (!taskHaveDeadlock.isEmpty()){
+                        synchronized (taskHaveDeadlock){
+                            addTask(taskHaveDeadlock.remove(0));
+                            logger.write("a task free");
+                        }
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
+
+    private boolean haveDeadLock(Task task) {
+        try {
+            if (deadlock.equalsIgnoreCase("prevention")){
+                storageHandler.sendRequest("prevention "+task.getId()+" "+task.getTaskRes());
+            }else if (deadlock.equalsIgnoreCase("detection")){
+
+            }else {
+                return false;
+            }
+//            synchronized (lock){
+//                lock.wait();
+//            }
+           String res=storageHandler.listenForResponse();
+            if (res.equalsIgnoreCase("false"))return false;
+            else return true;
+
+        } catch (IOException  e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     private Task getTask() {
@@ -185,8 +231,8 @@ public class Server implements Runnable {
     public synchronized void TaskFinished(Task task) {
         System.out.println("task " + task.getId() + " executed successfully with result " + task.getRes());
         try {
-            storageHandler.sendRequest("released "+task.getId());
-            logger.write("released "+task.getId()+"  to storage");
+            storageHandler.sendRequest("released " + task.getId());
+            logger.write("released " + task.getId() + "  to storage");
         } catch (IOException e) {
             e.printStackTrace();
         }

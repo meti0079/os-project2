@@ -113,7 +113,7 @@ public class MasterMain {
     }
 
     public static void readInputs() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("C:\\Users\\Mehdi\\IdeaProjects\\OS_HW2\\input12.txt"));
+        Scanner scanner = new Scanner(new File("C:\\Users\\Mehdi\\IdeaProjects\\OS_HW2\\input6.txt"));
         int argNum = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < argNum; i++) {
             command.add(scanner.nextLine());

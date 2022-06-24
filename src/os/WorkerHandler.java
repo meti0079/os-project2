@@ -110,7 +110,7 @@ public class WorkerHandler {
                 ss+=(" "+res[i]+" ");
             }
         }
-        System.out.println("changTask2String : "+ss);
+//        System.out.println("changTask2String : "+ss);
         return ss.substring(0,ss.length()-1);
     }
 
