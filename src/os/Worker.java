@@ -85,14 +85,14 @@ public class Worker {
     }
 
 
-    private  void handleMessage(String message) throws IOException, InterruptedException {
+    private void handleMessage(String message) throws IOException, InterruptedException {
         synchronized (lock2) {
             String[] req = message.split(" ");
             if (req[0].equalsIgnoreCase("TASK")) {
-                int id = Integer.parseInt(req[req.length-2]);
+                int id = Integer.parseInt(req[req.length - 2]);
                 task = new Task(changeTask2String(req), id);
-                task.setRes(Integer.parseInt(req[req.length-1]));
-                storageHandler.sendRequest("MYTASK "+id);
+                task.setRes(Integer.parseInt(req[req.length - 1]));
+                storageHandler.sendRequest("MYTASK " + id);
                 handleTask(task);
             } else if (req[0].equalsIgnoreCase("intrupt")) {
                 logger.write(" in intrupt handlling");
@@ -105,7 +105,7 @@ public class Worker {
     }
 
     private void handleTask(Task task) {
-        if (taskThread!=null)taskThread.stop();
+        if (taskThread != null) taskThread.stop();
         taskThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -122,7 +122,7 @@ public class Worker {
                             task.setLastTime("0");
                         } else {
                             dos.writeUTF("taskUnFinished " + task.getTaskString());
-                            storageHandler.sendRequest("IAMINTRUPT "+task.getId());
+                            storageHandler.sendRequest("IAMINTRUPT " + task.getId());
                             logger.write("send task unfinished to server ");
                             break;
                         }
@@ -133,7 +133,7 @@ public class Worker {
                         } else {
                             logger.write("task intrupt in wait for storage ");
                             task.intruptInSleep("0");
-                            storageHandler.sendRequest("IAMINTRUPT "+task.getId());
+                            storageHandler.sendRequest("IAMINTRUPT " + task.getId());
                             dos.writeUTF("taskUnFinished " + task.getTaskString());
                             break;
                         }
@@ -154,7 +154,7 @@ public class Worker {
                 try {
                     while (true) {
                         String asnwer = storageHandler.listenForResponse();
-                        logger.write("response from storage : " +asnwer);
+                        logger.write("response from storage : " + asnwer);
                         x[0] = asnwer.split(" ")[1];
 
                         task.setLastData(Integer.parseInt(x[0]));
@@ -173,8 +173,7 @@ public class Worker {
     }
 
 
-
-    private  boolean handleIndex(String index) throws IOException, InterruptedException {
+    private boolean handleIndex(String index) throws IOException, InterruptedException {
         logger.write("send request to storage for " + "obtain " + task.getId() + " " + index);
         task.setLastData(null);
         storageHandler.sendRequest("obtain " + task.getId() + " " + index);
@@ -198,7 +197,7 @@ public class Worker {
         long et = System.currentTimeMillis();
         long dif = et - st;
         logger.write("after sleep time 1");
-        logger.write("dif "+dif+"   time :"+time);
+        logger.write("dif " + dif + "   time :" + time);
         if (time > dif) {
             logger.write("task intrupt in sleep time " + String.valueOf(time - dif));
             task.intruptInSleep(String.valueOf(time - dif));
@@ -215,7 +214,7 @@ public class Worker {
 
     private String changeTask2String(String[] res) {
         String ss = "";
-        for (int i = 1; i < res.length-2; i++) {
+        for (int i = 1; i < res.length - 2; i++) {
             if (i % 2 == 1) {
                 ss += res[i];
             } else {

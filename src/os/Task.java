@@ -2,26 +2,27 @@ package os;
 
 import java.util.*;
 
-public class Task {
+public class Task implements Comparable<Task>{
     private LinkedList<String> indexes;
     private LinkedList<String> times;
-    private  String task;
+    private String task;
     private int res;
     private int id;
     private int timeSum;
-    private  String lastIndex;
+    private String lastIndex;
     private String lastTime;
     private Integer lastData;
-    public Task(String task,int id) {
-        this.task=task;
-        this.id=id;
+
+    public Task(String task, int id) {
+        this.task = task;
+        this.id = id;
         indexes = new LinkedList<>();
         times = new LinkedList<>();
         String[] taskSplit = task.split(" ");
         for (int i = 0; i < taskSplit.length; i++) {
             if (i % 2 == 0) {
                 times.addLast(taskSplit[i]);
-                timeSum+=Integer.parseInt(taskSplit[i]);
+                timeSum += Integer.parseInt(taskSplit[i]);
             } else {
                 indexes.addLast(taskSplit[i]);
             }
@@ -33,17 +34,17 @@ public class Task {
         String[] s = new String[2];
         s[0] = times.pollFirst();
         s[1] = indexes.pollFirst();
-        lastIndex=s[1];
-        lastTime=s[0];
+        lastIndex = s[1];
+        lastTime = s[0];
         return s;
     }
 
-    public boolean idDone(){
+    public boolean idDone() {
         return times.isEmpty();
     }
 
-    public void miniTaskDone(int x){
-        res+=x;
+    public void miniTaskDone(int x) {
+        res += x;
     }
 
 
@@ -77,12 +78,12 @@ public class Task {
     }
 
     public String getTaskString() {
-        String x="";
+        String x = "";
         for (int i = 0; i < indexes.size(); i++) {
-                x+=times.get(i);
-                x+=(" "+indexes.get(i)+" ");
+            x += times.get(i);
+            x += (" " + indexes.get(i) + " ");
         }
-        x+=id+" "+res;
+        x += id + " " + res;
         return x;
     }
 
@@ -98,7 +99,8 @@ public class Task {
     public void setLastTime(String lastTime) {
         this.lastTime = lastTime;
     }
-    public void intruptInSleep(String lastTime){
+
+    public void intruptInSleep(String lastTime) {
         times.addFirst(lastTime);
         indexes.addFirst(lastIndex);
     }
@@ -110,11 +112,20 @@ public class Task {
     public void setLastData(Integer lastData) {
         this.lastData = lastData;
     }
-    public String getTaskRes(){
-        String s="";
-        for (String s1:indexes) {
-            s+=s1+" ";
+
+    public String getTaskRes() {
+        String s = "";
+        for (String s1 : indexes) {
+            s += s1 + " ";
         }
-        return s.substring(0,s.length()-1);
+        return s.substring(0, s.length() - 1);
+    }
+
+
+
+
+    @Override
+    public int compareTo(Task o) {
+        return this.timeSum-o.timeSum;
     }
 }

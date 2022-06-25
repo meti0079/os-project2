@@ -19,22 +19,22 @@ public class WorkerHandler {
 
 
     public WorkerHandler(int id, Socket clientSocket, Server server) throws IOException {
-        lock=new Object();
+        lock = new Object();
         this.id = id;
-        running=true;
+        running = true;
         this.clientSocket = clientSocket;
         this.dis = new DataInputStream(clientSocket.getInputStream());
         this.dos = new DataOutputStream(clientSocket.getOutputStream());
-        System.out.println(String.format("worker %d start",id));
+        System.out.println(String.format("worker %d start", id));
         listenForRes();
-        this.server=server;
+        this.server = server;
     }
 
-    private void listenForRes(){
-        Thread thread= new Thread(new Runnable() {
+    private void listenForRes() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (running){
+                while (running) {
                     try {
                         handleRes(listenForResponse());
                     } catch (IOException e) {
@@ -46,9 +46,9 @@ public class WorkerHandler {
         thread.start();
     }
 
-    public void setTask2Worker(Task task){
-        String req= "TASK "+task.getTaskString();
-        this.task=task;
+    public void setTask2Worker(Task task) {
+        String req = "TASK " + task.getTaskString();
+        this.task = task;
         try {
             sendRequest(req);
         } catch (IOException e) {
@@ -64,25 +64,25 @@ public class WorkerHandler {
         return dis.readUTF();
     }
 
-    private void handleRes(String res){
-        Logger.getInstance().write("mesage : "+res);
-        String [] response=res.split(" ");
-        if (response[0].equalsIgnoreCase("response")){
+    private void handleRes(String res) {
+        Logger.getInstance().write("mesage : " + res);
+        String[] response = res.split(" ");
+        if (response[0].equalsIgnoreCase("response")) {
             task.setRes(Integer.parseInt(response[1]));
             server.TaskFinished(task);
-            task=null;
-            synchronized (lock){
+            task = null;
+            synchronized (lock) {
                 lock.notify();
             }
 
-        }else if (response[0].equalsIgnoreCase("taskUnFinished")){
-            this.task=null;
-            int taskId= Integer.parseInt(response[response.length-2]);
-            Task task= new Task(changeTask2String(response),taskId);
-            task.setRes(Integer.parseInt(response[response.length-1]));
+        } else if (response[0].equalsIgnoreCase("taskUnFinished")) {
+            this.task = null;
+            int taskId = Integer.parseInt(response[response.length - 2]);
+            Task task = new Task(changeTask2String(response), taskId);
+            task.setRes(Integer.parseInt(response[response.length - 1]));
             server.addTask(task);
             Logger.getInstance().write("task unfinished");
-            synchronized (lock){
+            synchronized (lock) {
                 lock.notify();
             }
             Logger.getInstance().write("task unfinished notify");
@@ -98,20 +98,21 @@ public class WorkerHandler {
         this.id = id;
     }
 
-    public Task getTask(){
+    public Task getTask() {
         return task;
     }
-    private String changeTask2String(String [] res){
-        String ss="";
-        for (int i = 1; i < res.length-1 ; i++) {
-            if (i%2==1){
-                ss+=res[i];
-            }else {
-                ss+=(" "+res[i]+" ");
+
+    private String changeTask2String(String[] res) {
+        String ss = "";
+        for (int i = 1; i < res.length - 1; i++) {
+            if (i % 2 == 1) {
+                ss += res[i];
+            } else {
+                ss += (" " + res[i] + " ");
             }
         }
 //        System.out.println("changTask2String : "+ss);
-        return ss.substring(0,ss.length()-1);
+        return ss.substring(0, ss.length() - 1);
     }
 
 

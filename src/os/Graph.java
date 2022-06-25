@@ -64,4 +64,13 @@ public class Graph {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Graph{" +
+                "adjacencyList=" + adjacencyList +
+                ", tasknum=" + tasknum +
+                ", resourceNum=" + resourceNum +
+                '}';
+    }
 }

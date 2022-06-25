@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class Storage {
 
@@ -21,7 +19,7 @@ public class Storage {
     private ServerSocket storageSocket;
     private static int port;
     private static int workerNumber;
-
+    private static Graph graph;
     public Storage() {
         dataLeader = new ArrayList<>();
         dataValue = new ArrayList<>();
@@ -101,11 +99,12 @@ public class Storage {
                     } else {
                         dataLeader.set(i, (String) queues.get(i).poll());
                         logger.write("queue is not empty so has to sent to " + dataLeader.get(i) + " data" + dataValue.get(i));
+                        graph.changeDirection(Integer.parseInt(dataLeader.get(i)),i);
                         sendDataToTask(dataLeader.get(i), dataValue.get(i));
                     }
                 }
             }
-
+        graph.freeRes(id);
         } else if (reqSplited[0].equalsIgnoreCase("worker")) {
             workerNumber = Integer.parseInt(reqSplited[1]);
         } else if (reqSplited[0].equalsIgnoreCase("MYTASK")) {
@@ -131,16 +130,28 @@ public class Storage {
             }
             for (int i = 0; i < indexes.size(); i++) {
                 if (dataLeader.get(Integer.parseInt(indexes.get(i))).equalsIgnoreCase(id) || dataLeader.get(Integer.parseInt(indexes.get(i))).equalsIgnoreCase("-1")) {
-
                 } else {
                     connection.sendRequest("true");
                     return true;
                 }
             }
             for (int i = 0; i < indexes.size(); i++) {
-                dataLeader.set(Integer.parseInt(indexes.get(i)),id);
+                dataLeader.set(Integer.parseInt(indexes.get(i)), id);
             }
             connection.sendRequest("false");
+        }else if (reqSplited[0].equalsIgnoreCase("detection")){
+            boolean x=graph.hasCycle(Integer.parseInt(reqSplited[1]));
+            connection.sendRequest(String.valueOf(x));
+        }else if (reqSplited[0].equalsIgnoreCase("graph")){
+            graph=new Graph(Integer.parseInt(reqSplited[1]),Integer.parseInt(reqSplited[2]));
+            String ss[]=reqSplited[3].split("##");
+            for (int i = 0; i < Integer.parseInt(reqSplited[1]); i++) {
+                String ts[]=ss[i].split("_");
+                for (int j = 0; j < ts.length; j++) {
+                    graph.getRes(i,Integer.parseInt(ts[j]));
+                }
+            }
+            logger.write(graph.toString());
         }
 
         return true;
@@ -160,6 +171,8 @@ public class Storage {
             return true;
         } else if (Integer.parseInt(dataLeader.get(Integer.parseInt(index))) == -1) {
             dataLeader.set(Integer.parseInt(index), id);
+            graph.changeDirection(Integer.parseInt(id),Integer.parseInt(index));
+            logger.write(graph.toString());
             return true;
         } else {
             queues.get(Integer.parseInt(index)).add(id);

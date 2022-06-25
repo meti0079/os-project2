@@ -27,7 +27,7 @@ public class StorageHandler {
         return dis.readUTF();
     }
 
-    public void close(){
+    public void close() {
         try {
             clientSocket.close();
         } catch (IOException e) {

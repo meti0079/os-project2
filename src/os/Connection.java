@@ -14,24 +14,23 @@ public class Connection {
 
 
     public Connection(Socket socket, Storage storage) throws IOException {
-        this.socket=socket;
-        dataInputStream= new DataInputStream(socket.getInputStream());
+        this.socket = socket;
+        dataInputStream = new DataInputStream(socket.getInputStream());
         this.storage = storage;
-        outputStream= new DataOutputStream(socket.getOutputStream());
-        ID="-1";
+        outputStream = new DataOutputStream(socket.getOutputStream());
+        ID = "-1";
         listenForRes();
-
     }
 
 
-    private void listenForRes(){
-        Thread thread= new Thread(new Runnable() {
+    private void listenForRes() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true){
+                while (true) {
                     try {
-                        String s=listenForResponse();
-                        storage.handleRequest(s,Connection.this);
+                        String s = listenForResponse();
+                        storage.handleRequest(s, Connection.this);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -50,11 +49,11 @@ public class Connection {
         return dataInputStream.readUTF();
     }
 
-    public void setTaskID(String id){
-        this.ID=id;
+    public void setTaskID(String id) {
+        this.ID = id;
     }
 
-    public String getTaskID(){
+    public String getTaskID() {
         return ID;
     }
 }
