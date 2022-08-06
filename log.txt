@@ -1,0 +1,643 @@
+storage : storage start on port 8001///time : 2022-07-07 11:13:45.032
+storage : storage established ///time : 2022-07-07 11:13:45.078
+master : server start on port 8080///time : 2022-07-07 11:13:45.323
+master : server established///time : 2022-07-07 11:13:45.363
+master : server conect to storage with port : 8001///time : 2022-07-07 11:13:45.382
+storage : server connect ///time : 2022-07-07 11:13:45.383
+storage : worker number 2///time : 2022-07-07 11:13:45.384
+storage : storage recive push 1///time : 2022-07-07 11:13:45.396
+master : pushed 1 on storage///time : 2022-07-07 11:13:45.398
+master : pushed 2 on storage///time : 2022-07-07 11:13:45.398
+master : pushed 3 on storage///time : 2022-07-07 11:13:45.398
+master : pushed 0 on storage///time : 2022-07-07 11:13:45.398
+master : pushed worker numbers2 on storage///time : 2022-07-07 11:13:45.403
+storage : data pushed in dataMap 0 1///time : 2022-07-07 11:13:45.414
+storage : storage recive push 2///time : 2022-07-07 11:13:45.415
+storage : data pushed in dataMap 1 2///time : 2022-07-07 11:13:45.415
+storage : storage recive push 3///time : 2022-07-07 11:13:45.415
+storage : data pushed in dataMap 2 3///time : 2022-07-07 11:13:45.415
+storage : storage recive push 0///time : 2022-07-07 11:13:45.415
+storage : data pushed in dataMap 3 0///time : 2022-07-07 11:13:45.415
+storage : storage recive worker 2///time : 2022-07-07 11:13:45.415
+master : graph graph 2 4 0_1_2##1_2_0///time : 2022-07-07 11:13:45.434
+storage : storage recive graph 2 4 0_1_2##1_2_0///time : 2022-07-07 11:13:45.435
+storage : Graph{adjacencyList=[[2, 3, 4], [3, 4, 2], [], [], [], []], tasknum=2, resourceNum=4}///time : 2022-07-07 11:13:45.455
+master : a worker connect to server 0///time : 2022-07-07 11:13:46.68
+master : a worker connect to server 1///time : 2022-07-07 11:13:46.681
+worker0 : worker connect to server ///time : 2022-07-07 11:13:46.683
+storage : worker connect ///time : 2022-07-07 11:13:46.734
+worker0 : worker connect to storage///time : 2022-07-07 11:13:46.736
+worker0 : worker now listen to server ///time : 2022-07-07 11:13:46.737
+worker2 : worker connect to server ///time : 2022-07-07 11:13:46.688
+storage : worker connect ///time : 2022-07-07 11:13:46.739
+worker2 : worker connect to storage///time : 2022-07-07 11:13:46.74
+worker2 : worker now listen to server ///time : 2022-07-07 11:13:46.741
+master : sort now///time : 2022-07-07 11:13:47.698
+storage : storage recive prevention 0 0 1 2///time : 2022-07-07 11:13:47.718
+master : dont have deadlock///time : 2022-07-07 11:13:47.718
+master : worker 0 and task 0 choose///time : 2022-07-07 11:13:47.718
+master : sort now///time : 2022-07-07 11:13:47.752
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.753
+master : have deadlock///time : 2022-07-07 11:13:47.753
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.755
+master : have deadlock///time : 2022-07-07 11:13:47.755
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.757
+master : have deadlock///time : 2022-07-07 11:13:47.757
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.759
+master : have deadlock///time : 2022-07-07 11:13:47.76
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.762
+master : have deadlock///time : 2022-07-07 11:13:47.762
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.764
+master : have deadlock///time : 2022-07-07 11:13:47.765
+worker0 : worker recive message from server : TASK 150 0 100 1 150 2 0 0///time : 2022-07-07 11:13:47.765
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.767
+master : have deadlock///time : 2022-07-07 11:13:47.767
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.769
+master : have deadlock///time : 2022-07-07 11:13:47.769
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.772
+master : have deadlock///time : 2022-07-07 11:13:47.772
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.774
+master : have deadlock///time : 2022-07-07 11:13:47.775
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.777
+master : have deadlock///time : 2022-07-07 11:13:47.777
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.779
+master : have deadlock///time : 2022-07-07 11:13:47.78
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.782
+master : have deadlock///time : 2022-07-07 11:13:47.782
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.784
+master : have deadlock///time : 2022-07-07 11:13:47.784
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.786
+master : have deadlock///time : 2022-07-07 11:13:47.786
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.79
+master : have deadlock///time : 2022-07-07 11:13:47.79
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.792
+master : have deadlock///time : 2022-07-07 11:13:47.792
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.795
+master : have deadlock///time : 2022-07-07 11:13:47.795
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.797
+master : have deadlock///time : 2022-07-07 11:13:47.797
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.799
+master : have deadlock///time : 2022-07-07 11:13:47.799
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.802
+master : have deadlock///time : 2022-07-07 11:13:47.802
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.804
+master : have deadlock///time : 2022-07-07 11:13:47.804
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.806
+master : have deadlock///time : 2022-07-07 11:13:47.806
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.809
+master : have deadlock///time : 2022-07-07 11:13:47.809
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.811
+master : have deadlock///time : 2022-07-07 11:13:47.811
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.813
+master : have deadlock///time : 2022-07-07 11:13:47.813
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.815
+master : have deadlock///time : 2022-07-07 11:13:47.815
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.818
+master : have deadlock///time : 2022-07-07 11:13:47.818
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.821
+master : have deadlock///time : 2022-07-07 11:13:47.821
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.823
+master : have deadlock///time : 2022-07-07 11:13:47.823
+storage : storage recive MYTASK 0///time : 2022-07-07 11:13:47.825
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.826
+storage : my task id now 0///time : 2022-07-07 11:13:47.826
+master : have deadlock///time : 2022-07-07 11:13:47.826
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.828
+master : have deadlock///time : 2022-07-07 11:13:47.828
+worker0 : befor sleep for time ///time : 2022-07-07 11:13:47.828
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.83
+master : have deadlock///time : 2022-07-07 11:13:47.831
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.833
+master : have deadlock///time : 2022-07-07 11:13:47.833
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.835
+master : have deadlock///time : 2022-07-07 11:13:47.836
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.838
+master : have deadlock///time : 2022-07-07 11:13:47.838
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.84
+master : have deadlock///time : 2022-07-07 11:13:47.84
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.842
+master : have deadlock///time : 2022-07-07 11:13:47.842
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.845
+master : have deadlock///time : 2022-07-07 11:13:47.845
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.847
+master : have deadlock///time : 2022-07-07 11:13:47.847
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.849
+master : have deadlock///time : 2022-07-07 11:13:47.849
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.852
+master : have deadlock///time : 2022-07-07 11:13:47.852
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.854
+master : have deadlock///time : 2022-07-07 11:13:47.854
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.856
+master : have deadlock///time : 2022-07-07 11:13:47.856
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.858
+master : have deadlock///time : 2022-07-07 11:13:47.858
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.861
+master : have deadlock///time : 2022-07-07 11:13:47.861
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.863
+master : have deadlock///time : 2022-07-07 11:13:47.863
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.865
+master : have deadlock///time : 2022-07-07 11:13:47.865
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.867
+master : have deadlock///time : 2022-07-07 11:13:47.867
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.87
+master : have deadlock///time : 2022-07-07 11:13:47.87
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.872
+master : have deadlock///time : 2022-07-07 11:13:47.872
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.874
+master : have deadlock///time : 2022-07-07 11:13:47.874
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.876
+master : have deadlock///time : 2022-07-07 11:13:47.876
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.879
+master : have deadlock///time : 2022-07-07 11:13:47.879
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.881
+master : have deadlock///time : 2022-07-07 11:13:47.881
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.884
+master : have deadlock///time : 2022-07-07 11:13:47.884
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.886
+master : have deadlock///time : 2022-07-07 11:13:47.886
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.888
+master : have deadlock///time : 2022-07-07 11:13:47.889
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.891
+master : have deadlock///time : 2022-07-07 11:13:47.891
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.893
+master : have deadlock///time : 2022-07-07 11:13:47.894
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.896
+master : have deadlock///time : 2022-07-07 11:13:47.896
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.899
+master : have deadlock///time : 2022-07-07 11:13:47.899
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.901
+master : have deadlock///time : 2022-07-07 11:13:47.901
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.903
+master : have deadlock///time : 2022-07-07 11:13:47.903
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.906
+master : have deadlock///time : 2022-07-07 11:13:47.906
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.908
+master : have deadlock///time : 2022-07-07 11:13:47.908
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.91
+master : have deadlock///time : 2022-07-07 11:13:47.91
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.913
+master : have deadlock///time : 2022-07-07 11:13:47.913
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.915
+master : have deadlock///time : 2022-07-07 11:13:47.915
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.918
+master : have deadlock///time : 2022-07-07 11:13:47.918
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.92
+master : have deadlock///time : 2022-07-07 11:13:47.92
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.923
+master : have deadlock///time : 2022-07-07 11:13:47.923
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.925
+master : have deadlock///time : 2022-07-07 11:13:47.925
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.927
+master : have deadlock///time : 2022-07-07 11:13:47.927
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.93
+master : have deadlock///time : 2022-07-07 11:13:47.93
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.932
+master : have deadlock///time : 2022-07-07 11:13:47.932
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.934
+master : have deadlock///time : 2022-07-07 11:13:47.934
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.937
+master : have deadlock///time : 2022-07-07 11:13:47.937
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.939
+master : have deadlock///time : 2022-07-07 11:13:47.939
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.942
+master : have deadlock///time : 2022-07-07 11:13:47.942
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.945
+master : have deadlock///time : 2022-07-07 11:13:47.945
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.947
+master : have deadlock///time : 2022-07-07 11:13:47.947
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.95
+master : have deadlock///time : 2022-07-07 11:13:47.95
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.952
+master : have deadlock///time : 2022-07-07 11:13:47.952
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.955
+master : have deadlock///time : 2022-07-07 11:13:47.955
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.957
+master : have deadlock///time : 2022-07-07 11:13:47.957
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.96
+master : have deadlock///time : 2022-07-07 11:13:47.96
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.962
+master : have deadlock///time : 2022-07-07 11:13:47.962
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.965
+master : have deadlock///time : 2022-07-07 11:13:47.965
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.967
+master : have deadlock///time : 2022-07-07 11:13:47.967
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.97
+master : have deadlock///time : 2022-07-07 11:13:47.97
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.972
+master : have deadlock///time : 2022-07-07 11:13:47.972
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.974
+master : have deadlock///time : 2022-07-07 11:13:47.974
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.977
+master : have deadlock///time : 2022-07-07 11:13:47.977
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.98
+master : have deadlock///time : 2022-07-07 11:13:47.98
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.982
+master : have deadlock///time : 2022-07-07 11:13:47.982
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.985
+master : have deadlock///time : 2022-07-07 11:13:47.985
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.987
+master : have deadlock///time : 2022-07-07 11:13:47.987
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.99
+master : have deadlock///time : 2022-07-07 11:13:47.99
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.992
+master : have deadlock///time : 2022-07-07 11:13:47.992
+worker0 : after sleep time 1///time : 2022-07-07 11:13:47.993
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.994
+master : have deadlock///time : 2022-07-07 11:13:47.994
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.997
+master : have deadlock///time : 2022-07-07 11:13:47.997
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:47.999
+master : have deadlock///time : 2022-07-07 11:13:47.999
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.001
+master : have deadlock///time : 2022-07-07 11:13:48.001
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.004
+master : have deadlock///time : 2022-07-07 11:13:48.004
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.006
+master : have deadlock///time : 2022-07-07 11:13:48.006
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.008
+master : have deadlock///time : 2022-07-07 11:13:48.008
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.012
+master : have deadlock///time : 2022-07-07 11:13:48.013
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.015
+master : have deadlock///time : 2022-07-07 11:13:48.015
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.017
+master : have deadlock///time : 2022-07-07 11:13:48.018
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.019
+master : have deadlock///time : 2022-07-07 11:13:48.019
+worker0 : dif 164   time :150///time : 2022-07-07 11:13:48.021
+worker0 : task dont intrupt in sleep time///time : 2022-07-07 11:13:48.021
+worker0 : after sleep time///time : 2022-07-07 11:13:48.021
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.023
+master : have deadlock///time : 2022-07-07 11:13:48.023
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.025
+master : have deadlock///time : 2022-07-07 11:13:48.025
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.028
+master : have deadlock///time : 2022-07-07 11:13:48.028
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.03
+master : have deadlock///time : 2022-07-07 11:13:48.03
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.032
+master : have deadlock///time : 2022-07-07 11:13:48.032
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.034
+master : have deadlock///time : 2022-07-07 11:13:48.034
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.037
+master : have deadlock///time : 2022-07-07 11:13:48.037
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.04
+master : have deadlock///time : 2022-07-07 11:13:48.041
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.043
+master : have deadlock///time : 2022-07-07 11:13:48.044
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.045
+master : have deadlock///time : 2022-07-07 11:13:48.045
+worker0 : send request to storage for obtain 0 0///time : 2022-07-07 11:13:48.046
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.047
+master : have deadlock///time : 2022-07-07 11:13:48.047
+storage : storage recive obtain 0 0///time : 2022-07-07 11:13:48.048
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.05
+master : have deadlock///time : 2022-07-07 11:13:48.05
+worker0 : response from storage : answer 1///time : 2022-07-07 11:13:48.051
+worker0 : before notify from storage///time : 2022-07-07 11:13:48.052
+worker0 : after notify from storage///time : 2022-07-07 11:13:48.052
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.052
+worker0 : task wait for response from storage///time : 2022-07-07 11:13:48.052
+master : have deadlock///time : 2022-07-07 11:13:48.052
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.054
+master : have deadlock///time : 2022-07-07 11:13:48.054
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.057
+master : have deadlock///time : 2022-07-07 11:13:48.057
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.061
+master : have deadlock///time : 2022-07-07 11:13:48.062
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.064
+master : have deadlock///time : 2022-07-07 11:13:48.064
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.067
+master : have deadlock///time : 2022-07-07 11:13:48.067
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.069
+master : have deadlock///time : 2022-07-07 11:13:48.069
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.072
+master : have deadlock///time : 2022-07-07 11:13:48.072
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.074
+master : have deadlock///time : 2022-07-07 11:13:48.074
+storage : send //answer 1//  to id : 0///time : 2022-07-07 11:13:48.076
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.077
+master : have deadlock///time : 2022-07-07 11:13:48.077
+worker0 : task update to id: 0  res: 1///time : 2022-07-07 11:13:48.078
+worker0 : befor sleep for time ///time : 2022-07-07 11:13:48.078
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.079
+master : have deadlock///time : 2022-07-07 11:13:48.08
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.082
+master : have deadlock///time : 2022-07-07 11:13:48.082
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.084
+master : have deadlock///time : 2022-07-07 11:13:48.084
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.086
+master : have deadlock///time : 2022-07-07 11:13:48.086
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.089
+master : have deadlock///time : 2022-07-07 11:13:48.09
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.092
+master : have deadlock///time : 2022-07-07 11:13:48.092
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.094
+master : have deadlock///time : 2022-07-07 11:13:48.095
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.097
+master : have deadlock///time : 2022-07-07 11:13:48.097
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.1
+master : have deadlock///time : 2022-07-07 11:13:48.1
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.102
+master : have deadlock///time : 2022-07-07 11:13:48.102
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.104
+master : have deadlock///time : 2022-07-07 11:13:48.104
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.106
+master : have deadlock///time : 2022-07-07 11:13:48.106
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.109
+master : have deadlock///time : 2022-07-07 11:13:48.109
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.111
+master : have deadlock///time : 2022-07-07 11:13:48.111
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.113
+master : have deadlock///time : 2022-07-07 11:13:48.113
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.115
+master : have deadlock///time : 2022-07-07 11:13:48.115
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.118
+master : have deadlock///time : 2022-07-07 11:13:48.118
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.12
+master : have deadlock///time : 2022-07-07 11:13:48.12
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.122
+master : have deadlock///time : 2022-07-07 11:13:48.122
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.124
+master : have deadlock///time : 2022-07-07 11:13:48.124
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.126
+master : have deadlock///time : 2022-07-07 11:13:48.126
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.129
+master : have deadlock///time : 2022-07-07 11:13:48.129
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.131
+master : have deadlock///time : 2022-07-07 11:13:48.131
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.133
+master : have deadlock///time : 2022-07-07 11:13:48.133
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.135
+master : have deadlock///time : 2022-07-07 11:13:48.135
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.137
+master : have deadlock///time : 2022-07-07 11:13:48.137
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.139
+master : have deadlock///time : 2022-07-07 11:13:48.139
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.141
+master : have deadlock///time : 2022-07-07 11:13:48.141
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.143
+master : have deadlock///time : 2022-07-07 11:13:48.143
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.145
+master : have deadlock///time : 2022-07-07 11:13:48.145
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.148
+master : have deadlock///time : 2022-07-07 11:13:48.148
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.15
+master : have deadlock///time : 2022-07-07 11:13:48.15
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.152
+master : have deadlock///time : 2022-07-07 11:13:48.152
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.154
+master : have deadlock///time : 2022-07-07 11:13:48.154
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.156
+master : have deadlock///time : 2022-07-07 11:13:48.156
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.158
+master : have deadlock///time : 2022-07-07 11:13:48.158
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.16
+master : have deadlock///time : 2022-07-07 11:13:48.16
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.162
+master : have deadlock///time : 2022-07-07 11:13:48.162
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.165
+master : have deadlock///time : 2022-07-07 11:13:48.165
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.167
+master : have deadlock///time : 2022-07-07 11:13:48.167
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.169
+master : have deadlock///time : 2022-07-07 11:13:48.169
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.171
+master : have deadlock///time : 2022-07-07 11:13:48.171
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.173
+master : have deadlock///time : 2022-07-07 11:13:48.173
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.175
+master : have deadlock///time : 2022-07-07 11:13:48.175
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.178
+master : have deadlock///time : 2022-07-07 11:13:48.178
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.18
+master : have deadlock///time : 2022-07-07 11:13:48.18
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.182
+master : have deadlock///time : 2022-07-07 11:13:48.182
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.184
+master : have deadlock///time : 2022-07-07 11:13:48.184
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.186
+master : have deadlock///time : 2022-07-07 11:13:48.186
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.189
+master : have deadlock///time : 2022-07-07 11:13:48.189
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.191
+master : have deadlock///time : 2022-07-07 11:13:48.191
+worker0 : after sleep time 1///time : 2022-07-07 11:13:48.193
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.193
+worker0 : dif 114   time :100///time : 2022-07-07 11:13:48.193
+worker0 : task dont intrupt in sleep time///time : 2022-07-07 11:13:48.193
+worker0 : after sleep time///time : 2022-07-07 11:13:48.193
+master : have deadlock///time : 2022-07-07 11:13:48.193
+worker0 : send request to storage for obtain 0 1///time : 2022-07-07 11:13:48.193
+storage : storage recive obtain 0 1///time : 2022-07-07 11:13:48.194
+storage : send //answer 2//  to id : 0///time : 2022-07-07 11:13:48.194
+worker0 : response from storage : answer 2///time : 2022-07-07 11:13:48.194
+worker0 : before notify from storage///time : 2022-07-07 11:13:48.194
+worker0 : after notify from storage///time : 2022-07-07 11:13:48.195
+worker0 : task wait for response from storage///time : 2022-07-07 11:13:48.195
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.195
+worker0 : task update to id: 0  res: 3///time : 2022-07-07 11:13:48.195
+worker0 : befor sleep for time ///time : 2022-07-07 11:13:48.195
+master : have deadlock///time : 2022-07-07 11:13:48.195
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.199
+master : have deadlock///time : 2022-07-07 11:13:48.199
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.201
+master : have deadlock///time : 2022-07-07 11:13:48.201
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.203
+master : have deadlock///time : 2022-07-07 11:13:48.203
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.205
+master : have deadlock///time : 2022-07-07 11:13:48.205
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.208
+master : have deadlock///time : 2022-07-07 11:13:48.208
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.21
+master : have deadlock///time : 2022-07-07 11:13:48.21
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.213
+master : have deadlock///time : 2022-07-07 11:13:48.213
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.216
+master : have deadlock///time : 2022-07-07 11:13:48.216
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.218
+master : have deadlock///time : 2022-07-07 11:13:48.218
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.22
+master : have deadlock///time : 2022-07-07 11:13:48.22
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.222
+master : have deadlock///time : 2022-07-07 11:13:48.222
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.225
+master : have deadlock///time : 2022-07-07 11:13:48.225
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.227
+master : have deadlock///time : 2022-07-07 11:13:48.227
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.229
+master : have deadlock///time : 2022-07-07 11:13:48.229
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.232
+master : have deadlock///time : 2022-07-07 11:13:48.232
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.234
+master : have deadlock///time : 2022-07-07 11:13:48.234
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.236
+master : have deadlock///time : 2022-07-07 11:13:48.236
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.239
+master : have deadlock///time : 2022-07-07 11:13:48.239
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.241
+master : have deadlock///time : 2022-07-07 11:13:48.242
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.244
+master : have deadlock///time : 2022-07-07 11:13:48.244
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.247
+master : have deadlock///time : 2022-07-07 11:13:48.247
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.249
+master : have deadlock///time : 2022-07-07 11:13:48.249
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.251
+master : have deadlock///time : 2022-07-07 11:13:48.251
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.254
+master : have deadlock///time : 2022-07-07 11:13:48.254
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.257
+master : have deadlock///time : 2022-07-07 11:13:48.257
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.263
+master : have deadlock///time : 2022-07-07 11:13:48.263
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.265
+master : have deadlock///time : 2022-07-07 11:13:48.265
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.267
+master : have deadlock///time : 2022-07-07 11:13:48.267
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.27
+master : have deadlock///time : 2022-07-07 11:13:48.271
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.275
+master : have deadlock///time : 2022-07-07 11:13:48.275
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.277
+master : have deadlock///time : 2022-07-07 11:13:48.277
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.279
+master : have deadlock///time : 2022-07-07 11:13:48.279
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.282
+master : have deadlock///time : 2022-07-07 11:13:48.282
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.284
+master : have deadlock///time : 2022-07-07 11:13:48.284
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.287
+master : have deadlock///time : 2022-07-07 11:13:48.287
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.289
+master : have deadlock///time : 2022-07-07 11:13:48.289
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.291
+master : have deadlock///time : 2022-07-07 11:13:48.291
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.294
+master : have deadlock///time : 2022-07-07 11:13:48.294
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.296
+master : have deadlock///time : 2022-07-07 11:13:48.296
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.299
+master : have deadlock///time : 2022-07-07 11:13:48.299
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.301
+master : have deadlock///time : 2022-07-07 11:13:48.301
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.304
+master : have deadlock///time : 2022-07-07 11:13:48.304
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.306
+master : have deadlock///time : 2022-07-07 11:13:48.306
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.308
+master : have deadlock///time : 2022-07-07 11:13:48.308
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.31
+master : have deadlock///time : 2022-07-07 11:13:48.31
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.313
+master : have deadlock///time : 2022-07-07 11:13:48.313
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.315
+master : have deadlock///time : 2022-07-07 11:13:48.315
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.317
+master : have deadlock///time : 2022-07-07 11:13:48.317
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.32
+master : have deadlock///time : 2022-07-07 11:13:48.32
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.322
+master : have deadlock///time : 2022-07-07 11:13:48.322
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.324
+master : have deadlock///time : 2022-07-07 11:13:48.324
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.326
+master : have deadlock///time : 2022-07-07 11:13:48.326
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.329
+master : have deadlock///time : 2022-07-07 11:13:48.329
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.331
+master : have deadlock///time : 2022-07-07 11:13:48.331
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.333
+master : have deadlock///time : 2022-07-07 11:13:48.333
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.336
+master : have deadlock///time : 2022-07-07 11:13:48.336
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.338
+master : have deadlock///time : 2022-07-07 11:13:48.338
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.34
+master : have deadlock///time : 2022-07-07 11:13:48.34
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.342
+master : have deadlock///time : 2022-07-07 11:13:48.342
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.345
+master : have deadlock///time : 2022-07-07 11:13:48.345
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.347
+master : have deadlock///time : 2022-07-07 11:13:48.347
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.349
+master : have deadlock///time : 2022-07-07 11:13:48.349
+worker0 : after sleep time 1///time : 2022-07-07 11:13:48.351
+worker0 : dif 156   time :150///time : 2022-07-07 11:13:48.351
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.351
+worker0 : task dont intrupt in sleep time///time : 2022-07-07 11:13:48.351
+worker0 : after sleep time///time : 2022-07-07 11:13:48.351
+master : have deadlock///time : 2022-07-07 11:13:48.351
+worker0 : send request to storage for obtain 0 2///time : 2022-07-07 11:13:48.351
+storage : storage recive obtain 0 2///time : 2022-07-07 11:13:48.352
+storage : send //answer 3//  to id : 0///time : 2022-07-07 11:13:48.352
+worker0 : response from storage : answer 3///time : 2022-07-07 11:13:48.352
+worker0 : before notify from storage///time : 2022-07-07 11:13:48.352
+worker0 : after notify from storage///time : 2022-07-07 11:13:48.352
+worker0 : task wait for response from storage///time : 2022-07-07 11:13:48.352
+worker0 : task update to id: 0  res: 6///time : 2022-07-07 11:13:48.352
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.353
+master : have deadlock///time : 2022-07-07 11:13:48.353
+master : mesage : response 6///time : 2022-07-07 11:13:48.353
+storage : storage recive released 0///time : 2022-07-07 11:13:48.359
+storage : now in released ///time : 2022-07-07 11:13:48.36
+master : released 0  to storage///time : 2022-07-07 11:13:48.36
+storage : found one 0 in hand task 0///time : 2022-07-07 11:13:48.366
+storage : queue is empty ///time : 2022-07-07 11:13:48.366
+storage : found one 1 in hand task 0///time : 2022-07-07 11:13:48.366
+storage : queue is empty ///time : 2022-07-07 11:13:48.366
+storage : found one 2 in hand task 0///time : 2022-07-07 11:13:48.366
+storage : queue is empty ///time : 2022-07-07 11:13:48.366
+storage : storage recive prevention 1 1 2 0///time : 2022-07-07 11:13:48.366
+master : dont have deadlock///time : 2022-07-07 11:13:48.366
+master : worker 1 and task 1 choose///time : 2022-07-07 11:13:48.367
+worker2 : worker recive message from server : TASK 0 1 300 2 200 0 1 0///time : 2022-07-07 11:13:48.375
+storage : storage recive MYTASK 1///time : 2022-07-07 11:13:48.401
+storage : my task id now 1///time : 2022-07-07 11:13:48.403
+worker2 : after sleep time///time : 2022-07-07 11:13:48.405
+worker2 : send request to storage for obtain 1 1///time : 2022-07-07 11:13:48.411
+storage : storage recive obtain 1 1///time : 2022-07-07 11:13:48.412
+storage : send //answer 2//  to id : 1///time : 2022-07-07 11:13:48.412
+worker2 : response from storage : answer 2///time : 2022-07-07 11:13:48.413
+worker2 : before notify from storage///time : 2022-07-07 11:13:48.413
+worker2 : after notify from storage///time : 2022-07-07 11:13:48.413
+worker2 : task wait for response from storage///time : 2022-07-07 11:13:48.413
+worker2 : task update to id: 1  res: 2///time : 2022-07-07 11:13:48.418
+worker2 : befor sleep for time ///time : 2022-07-07 11:13:48.419
+worker2 : after sleep time 1///time : 2022-07-07 11:13:48.724
+worker2 : dif 305   time :300///time : 2022-07-07 11:13:48.75
+worker2 : task dont intrupt in sleep time///time : 2022-07-07 11:13:48.75
+worker2 : after sleep time///time : 2022-07-07 11:13:48.75
+worker2 : send request to storage for obtain 1 2///time : 2022-07-07 11:13:48.75
+storage : storage recive obtain 1 2///time : 2022-07-07 11:13:48.751
+storage : send //answer 3//  to id : 1///time : 2022-07-07 11:13:48.751
+worker2 : response from storage : answer 3///time : 2022-07-07 11:13:48.751
+worker2 : before notify from storage///time : 2022-07-07 11:13:48.752
+worker2 : after notify from storage///time : 2022-07-07 11:13:48.752
+worker2 : task wait for response from storage///time : 2022-07-07 11:13:48.752
+worker2 : task update to id: 1  res: 5///time : 2022-07-07 11:13:48.752
+worker2 : befor sleep for time ///time : 2022-07-07 11:13:48.752
+worker2 : after sleep time 1///time : 2022-07-07 11:13:48.96
+worker2 : dif 208   time :200///time : 2022-07-07 11:13:48.96
+worker2 : task dont intrupt in sleep time///time : 2022-07-07 11:13:48.96
+worker2 : after sleep time///time : 2022-07-07 11:13:48.961
+worker2 : send request to storage for obtain 1 0///time : 2022-07-07 11:13:48.961
+storage : storage recive obtain 1 0///time : 2022-07-07 11:13:48.961
+storage : send //answer 1//  to id : 1///time : 2022-07-07 11:13:48.962
+worker2 : response from storage : answer 1///time : 2022-07-07 11:13:48.962
+worker2 : before notify from storage///time : 2022-07-07 11:13:48.963
+worker2 : after notify from storage///time : 2022-07-07 11:13:48.963
+worker2 : task wait for response from storage///time : 2022-07-07 11:13:48.963
+worker2 : task update to id: 1  res: 6///time : 2022-07-07 11:13:48.963
+master : mesage : response 6///time : 2022-07-07 11:13:48.965
+storage : storage recive released 1///time : 2022-07-07 11:13:48.966
+master : released 1  to storage///time : 2022-07-07 11:13:48.966
+storage : now in released ///time : 2022-07-07 11:13:48.966
+storage : found one 0 in hand task 1///time : 2022-07-07 11:13:48.966
+storage : queue is empty ///time : 2022-07-07 11:13:48.967
+storage : found one 1 in hand task 1///time : 2022-07-07 11:13:48.967
+storage : queue is empty ///time : 2022-07-07 11:13:48.967
+storage : found one 2 in hand task 1///time : 2022-07-07 11:13:48.968
+storage : queue is empty ///time : 2022-07-07 11:13:48.968
+master : server closed!!///time : 2022-07-07 11:13:48.969

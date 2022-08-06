@@ -21,7 +21,6 @@ public class MasterMain {
     public static int workNumber;
     public static String alg;
     public static String deadlock;
-
     public static List<String> command;
     public static ArrayList<String> data;
     public static ArrayList<Task> tasks;

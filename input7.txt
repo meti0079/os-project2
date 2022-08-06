@@ -1,0 +1,16 @@
+5
+C:\Users\Mehdi\.jdks\corretto-11.0.14.1\bin\java.exe
+"-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\lib\idea_rt.jar=30384:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\bin"
+-Dfile.encoding=UTF-8
+-classpath
+C:\Users\Mehdi\IdeaProjects\OS_HW2\out\production\OS_HW2
+8000
+1
+RR
+50
+prevention
+8001
+1 2 3 0
+2
+150 0 100 1 150 2
+0 1 300 2 200 3
